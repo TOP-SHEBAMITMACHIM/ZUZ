@@ -349,13 +349,163 @@ body.ready .ha{opacity:1;transform:none}
 .marquee:hover .marquee-track{animation-play-state:paused}
 @keyframes marq{to{transform:translateX(-50%)}}
 
-/* Route above steps */
-.route{position:relative;height:56px;margin:-10px 0 18px}
-.route-line{position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:4px;background:repeating-linear-gradient(90deg,var(--line) 0 14px,transparent 14px 24px)}
-.route-fill{position:absolute;right:0;top:0;bottom:0;width:var(--p,0%);border-radius:4px;background:var(--yellow);box-shadow:0 0 14px rgba(255,199,44,.6)}
-.route-pin{position:absolute;top:50%;width:18px;height:18px;margin-top:-9px;transform:translateX(50%);border-radius:50%;background:#fff;border:3px solid var(--line);transition:all .35s cubic-bezier(.3,1.6,.5,1)}
-.route-pin.on{border-color:var(--ink);background:var(--yellow);transform:translateX(50%) scale(1.35)}
-.route-car{position:absolute;top:50%;inset-inline-start:var(--p,0%);width:56px;transform:translate(50%,-70%);z-index:2}
+/* ---------- How it works: sticky phone ---------- */
+.how{background:linear-gradient(180deg,#fff 0%,var(--soft) 100%)}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.hsteps{list-style:none;display:grid}
+.hstep{min-height:52vh;display:flex;align-items:center}
+.hstep-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;gap:22px;align-items:flex-start;padding:26px 28px;border-radius:24px;width:100%;opacity:.35;transform:scale(.97);transform-origin:right center;transition:opacity .5s,transform .5s,background .5s,box-shadow .5s}
+.hstep-btn:focus-visible{outline:3px solid #1A56DB;outline-offset:3px}
+.hstep.on .hstep-btn{opacity:1;transform:none;background:#fff;box-shadow:var(--shadow)}
+.hnum{flex:none;font-size:46px;font-weight:900;line-height:1;color:var(--line);transition:color .5s;font-variant-numeric:tabular-nums}
+.hstep.on .hnum{color:var(--yellow);text-shadow:0 0 24px rgba(255,199,44,.45)}
+.htxt b{display:block;font-size:26px;font-weight:900;margin-bottom:6px;color:var(--ink)}
+.htxt > span{color:var(--muted);font-size:17px}
+.phone-col{position:sticky;top:96px;padding:20px 0 30px}
+.phone-col::before{content:"";position:absolute;inset:8% 4%;background:radial-gradient(circle,rgba(255,199,44,.38),transparent 65%);filter:blur(30px);z-index:0}
+.phone{position:relative;z-index:1;width:300px;height:620px;margin:0 auto;border-radius:50px;background:#0A0B0E;padding:11px;box-shadow:0 0 0 2px #2E333B,0 0 0 8px #14171B,0 50px 90px rgba(18,20,23,.35);animation:floaty 6s ease-in-out infinite}
+.phone::before,.phone::after{content:"";position:absolute;right:-10px;width:3px;border-radius:2px;background:#2E333B}
+.phone::before{top:130px;height:60px}.phone::after{top:205px;height:40px}
+@keyframes floaty{50%{transform:translateY(-10px) rotate(-.6deg)}}
+.phone-screen{position:absolute;inset:11px;border-radius:40px;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,#23272E,#121417 60%);color:#fff}
+.phone-island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:92px;height:27px;border-radius:20px;background:#000;z-index:6}
+.phone-status{position:absolute;top:15px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;z-index:5;direction:ltr}
+.phone-status span:first-child{order:0}
+.ps-icons{display:flex;align-items:flex-end;gap:2px}
+.ps-icons i{display:block;width:3px;background:#fff;border-radius:1px}
+.ps-icons i:nth-child(1){height:5px}.ps-icons i:nth-child(2){height:8px}.ps-icons i:nth-child(3){height:11px}
+.ps-icons b{display:block;width:20px;height:10px;border:1.5px solid #fff;border-radius:3px;margin-left:5px;position:relative;background:linear-gradient(90deg,#fff 70%,transparent 70%) 1px 1px/calc(100% - 2px) calc(100% - 2px) no-repeat}
+.pscreen{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#23272E,#121417 60%);padding:58px 20px 22px;display:flex;flex-direction:column;opacity:0;transform:translateY(26px) scale(.97);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.pscreen.on{opacity:1;transform:none}
+.ps-label{color:rgba(255,255,255,.6);font-size:13px;font-weight:600;text-align:center;margin-bottom:4px;min-height:20px}
+/* dial */
+.dial-num{text-align:center;font-size:42px;font-weight:900;color:var(--yellow);min-height:58px;letter-spacing:1px;display:flex;justify-content:center;align-items:center;gap:2px}
+.caret{width:3px;height:36px;background:var(--yellow);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 16px;margin:14px 6px 0;direction:ltr}
+.keypad span{height:56px;border-radius:50%;width:56px;justify-self:center;display:grid;place-items:center;background:#1F242B;font-size:23px;font-weight:700;transition:background .15s,transform .15s,color .15s}
+.keypad span.press{background:var(--yellow);color:var(--ink);transform:scale(.88);box-shadow:0 0 22px rgba(255,199,44,.6)}
+.callbtn{margin:auto auto 6px;width:62px;height:62px;border-radius:50%;background:#22C55E;display:grid;place-items:center;position:relative;transition:transform .3s}
+.callbtn svg{width:28px;height:28px;color:#fff}
+.callbtn.ring{animation:callshake .6s ease-in-out infinite}
+.callbtn.ring::before,.callbtn.ring::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #22C55E;animation:ripple 1.4s ease-out infinite}
+.callbtn.ring::after{animation-delay:.7s}
+@keyframes ripple{to{transform:scale(2.1);opacity:0}}
+@keyframes callshake{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+/* price */
+.ps-route{display:flex;align-items:center;gap:10px;background:#1C2026;border-radius:16px;padding:14px;margin:10px 0 18px}
+.ps-route small{display:block;font-size:11px;color:rgba(255,255,255,.5)}
+.ps-route b{font-size:16px}
+.ps-track{flex:1;height:22px;position:relative;background:repeating-linear-gradient(270deg,rgba(255,255,255,.25) 0 6px,transparent 6px 11px) center/100% 2px no-repeat}
+.ps-mini{position:absolute;top:-2px;right:0;width:34px;transition:right 1.6s cubic-bezier(.45,0,.35,1)}
+.pscreen.on .ps-mini{right:calc(100% - 34px)}
+.ps-price{text-align:center;color:var(--yellow);display:flex;justify-content:center;align-items:baseline;gap:6px;direction:ltr}
+.ps-price span{font-size:28px;font-weight:800}
+.ps-price b{font-size:68px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.ps-note{text-align:center;font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 16px}
+.ps-checks{list-style:none;display:grid;gap:10px}
+.ps-checks li{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;opacity:0;transform:translateX(-14px);transition:.45s}
+.ps-checks li::before{content:"✓";width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,.18);color:#22C55E;display:grid;place-items:center;font-size:12px;font-weight:900}
+.ps-checks li.in{opacity:1;transform:none}
+.ps-stamp{margin:auto auto 4px;border:2.5px solid var(--yellow);color:var(--yellow);font-weight:900;font-size:19px;padding:8px 20px;border-radius:12px;transform:rotate(-8deg) scale(2.2);opacity:0;transition:transform .4s cubic-bezier(.3,1.7,.5,1),opacity .2s}
+.ps-stamp.in{opacity:1;transform:rotate(-8deg) scale(1)}
+/* map */
+.ps-mapwrap{padding:0}
+.ps-map{position:absolute;inset:0;width:100%;height:100%}
+.map-route{fill:none;stroke:var(--yellow);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 6px rgba(255,199,44,.6))}
+.pscreen.on .map-route{transition:stroke-dashoffset 1.1s ease-out;stroke-dashoffset:0}
+.map-pin circle:first-child{animation:pinpulse 1.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pinpulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(2);opacity:0}}
+.ps-sheet{position:absolute;left:10px;right:10px;bottom:12px;background:rgba(30,34,40,.96);backdrop-filter:blur(8px);border-radius:22px;padding:14px;box-shadow:0 -10px 30px rgba(0,0,0,.4);transform:translateY(120%);transition:transform .6s .2s cubic-bezier(.2,.8,.2,1)}
+.pscreen.on .ps-sheet{transform:none}
+.ps-eta-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:12px}
+.ps-eta-bar i{display:block;height:100%;width:0;background:var(--yellow);border-radius:4px}
+.ps-drv{display:flex;align-items:center;gap:12px}
+.drv-ava{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--ink);display:grid;place-items:center;font-weight:900;font-size:20px;flex:none}
+.drv-txt{flex:1}
+.drv-txt b{display:block;font-size:15px}
+.drv-txt small{color:rgba(255,255,255,.55);font-size:12px}
+.drv-eta{text-align:center;background:#121417;border-radius:12px;padding:6px 10px}
+.drv-eta b{display:block;font-size:22px;line-height:1;color:var(--yellow)}
+.drv-eta small{font-size:11px;color:rgba(255,255,255,.6)}
+/* done */
+.ps-done{align-items:center;justify-content:center;text-align:center;gap:6px}
+.done-check{width:120px;height:120px;margin-bottom:8px}
+.dc-ring{fill:rgba(34,197,94,.12);stroke:#22C55E;stroke-width:5;stroke-dasharray:1;stroke-dashoffset:1}
+.dc-tick{fill:none;stroke:#22C55E;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.pscreen.on .dc-ring{transition:stroke-dashoffset .7s .1s ease-out;stroke-dashoffset:0}
+.pscreen.on .dc-tick{transition:stroke-dashoffset .45s .7s ease-out;stroke-dashoffset:0}
+.ps-done h4{font-size:38px;font-weight:900}
+.ps-done p{color:rgba(255,255,255,.7)}
+.stars{display:flex;gap:6px;font-size:30px;direction:ltr;margin-top:18px}
+.stars i{font-style:normal;color:#3A4049;transform:scale(.6);transition:color .3s,transform .35s cubic-bezier(.3,1.8,.5,1)}
+.stars i.in{color:var(--yellow);transform:none;text-shadow:0 0 14px rgba(255,199,44,.6)}
+.ps-done small{color:rgba(255,255,255,.5);font-size:12px}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;top:-12px;width:7px;height:12px;border-radius:2px;opacity:0}
+.pscreen.on .confetti i{animation:conf 2.4s ease-in forwards}
+@keyframes conf{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(640px) rotate(720deg)}}
+.phone-dots{position:relative;z-index:1;display:flex;justify-content:center;gap:8px;margin-top:26px}
+.phone-dots i{width:8px;height:8px;border-radius:8px;background:var(--line);transition:width .4s,background .4s}
+.phone-dots i.on{width:28px;background:var(--ink)}
+
+/* ---------- Photos ---------- */
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;filter:saturate(.85);-webkit-mask-image:linear-gradient(180deg,#000 20%,rgba(0,0,0,.4) 70%,transparent 95%);mask-image:linear-gradient(180deg,#000 20%,rgba(0,0,0,.4) 70%,transparent 95%);animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.12) translateX(2%)}to{transform:scale(1) translateX(0)}}
+.svc-media{margin:-30px -30px 0;height:180px;overflow:hidden;position:relative}
+.svc-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(18,20,23,.35))}
+.svc-media img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.svc:hover .svc-media img{transform:scale(1.08)}
+.svc-media + .ic{margin-top:-26px;position:relative;z-index:2;border:4px solid #fff;background:var(--yellow);box-sizing:content-box}
+.svc.featured{background:linear-gradient(180deg,rgba(18,20,23,.35) 0%,rgba(18,20,23,.88) 45%,#121417 75%),url(images/airport.webp) center top/cover}
+.why-visual{background:linear-gradient(160deg,rgba(18,20,23,.55),rgba(18,20,23,.95) 60%),url(images/taxi-sign.webp) center/cover}
+
+/* ---------- Accessibility ---------- */
+.skip{position:fixed;top:-60px;right:16px;z-index:200;background:var(--yellow);color:var(--ink);font-weight:800;padding:10px 18px;border-radius:0 0 12px 12px;transition:top .2s}
+.skip:focus{top:0}
+:focus-visible{outline:3px solid #1A56DB;outline-offset:3px}
+.a11y-btn{position:fixed;left:18px;bottom:18px;z-index:80;width:54px;height:54px;border-radius:50%;border:3px solid #fff;background:#1A56DB;color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(26,86,219,.45);transition:transform .2s}
+.a11y-btn:hover{transform:scale(1.08) rotate(-8deg)}
+.a11y-btn svg{width:28px;height:28px}
+.a11y-panel{position:fixed;left:18px;bottom:84px;z-index:90;width:min(340px,calc(100vw - 32px));max-height:calc(100vh - 120px);overflow:auto;background:#fff;color:var(--ink);border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.3);padding:18px;border:1px solid var(--line);animation:panelIn .25s ease-out}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px)}}
+.a11y-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.a11y-head b{font-size:19px;font-weight:900}
+.a11y-x{border:0;background:var(--soft);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px}
+.a11y-size{display:flex;align-items:center;gap:8px;background:var(--soft);border-radius:14px;padding:8px 12px;margin-bottom:12px}
+.a11y-size span{flex:1;font-weight:700}
+.a11y-size button{border:0;background:#fff;border-radius:10px;width:42px;height:36px;font-family:inherit;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.a11y-size output{min-width:48px;text-align:center;font-weight:800}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.a11y-grid button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border-radius:14px;border:2px solid var(--line);background:#fff;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink);transition:border .15s,background .15s}
+.a11y-grid button:hover{border-color:#1A56DB}
+.a11y-grid button[aria-pressed="true"]{border-color:#1A56DB;background:#EAF0FF}
+.ao-ic{font-size:20px;line-height:1}
+.a11y-foot{display:flex;gap:8px;margin-top:12px}
+.a11y-foot button{flex:1;border:0;border-radius:12px;padding:11px;font-family:inherit;font-weight:800;cursor:pointer;background:var(--soft);color:var(--ink)}
+.a11y-foot #a11yStmtBtn{background:var(--ink);color:#fff}
+.a11y-stmt{max-width:560px;width:calc(100vw - 32px);border:0;border-radius:22px;padding:28px;color:var(--ink);line-height:1.7}
+.a11y-stmt::backdrop{background:rgba(18,20,23,.6)}
+.a11y-stmt h2{font-size:26px;font-weight:900;margin-bottom:10px}
+.a11y-stmt h3{font-size:17px;font-weight:800;margin:16px 0 6px}
+.a11y-stmt ul{padding-inline-start:20px}
+.a11y-stmt a{border-bottom:2px solid var(--yellow);font-weight:700}
+.stmt-date{color:var(--muted);font-size:14px;margin-top:12px}
+.a11y-stmt .btn{margin-top:16px;padding:12px 26px}
+/* modes */
+html.a11y-contrast :is(header,main,footer){filter:contrast(1.35)}
+html.a11y-gray :is(header,main,footer){filter:grayscale(1)}
+html.a11y-contrast.a11y-gray :is(header,main,footer){filter:contrast(1.35) grayscale(1)}
+html.a11y-contrast{--muted:#2B2F35;--line:#9AA0A8}
+html.a11y-links a{text-decoration:underline!important;text-underline-offset:4px;text-decoration-thickness:2px!important}
+html.a11y-links a:not(.btn){outline:2px dashed #1A56DB;outline-offset:2px}
+html.a11y-font body,html.a11y-font body *:not(svg):not(svg *){font-family:Arial,"Helvetica Neue",sans-serif!important}
+html.a11y-spacing body{letter-spacing:.05em;word-spacing:.15em}
+html.a11y-spacing :is(p,li,summary,.htxt span){line-height:2!important}
+html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 11-7 1 4 7-3 1-4-7-5 5z' fill='%23000' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E") 4 2,auto!important}
+html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!important;box-shadow:0 0 0 8px rgba(255,59,48,.25)!important}
+:is(header,main,footer){zoom:var(--a11y-zoom,1)}
 
 /* Road divider */
 .lane{position:relative;height:150px;overflow:hidden;background:#fff}
@@ -396,10 +546,21 @@ body.ready .ha{opacity:1;transform:none}
   .street{height:44px}
   .car-a{width:130px;bottom:18px}
   .car-b{width:80px;bottom:34px}
-  .route{display:none}
   .lane{height:130px}
   .lane-car{width:120px}
   .marquee-track span{font-size:17px}
+  .a11y-btn{bottom:86px;left:12px;width:48px;height:48px}
+  .a11y-panel{bottom:146px;left:12px}
+  .phone{transform:scale(.88);transform-origin:top center;margin-bottom:-74px;animation:none}
+}
+@media (max-width:980px){
+  .how-grid{grid-template-columns:1fr;gap:10px}
+  .phone-col{position:relative;top:0;order:-1}
+  .hstep{min-height:0;margin-bottom:6px}
+  .hstep-btn{padding:16px 18px;opacity:.55}
+  .hnum{font-size:32px}
+  .htxt b{font-size:20px}
+  .htxt > span{font-size:15px}
 }
 @media (prefers-reduced-motion:reduce){
   .car .wheel,.car .body,.car .beam,.skyline,.marquee-track,.book,.hero::before,.hero h1 em,.car-a,.car-b,.skyline .tw{animation:none!important}
@@ -436,6 +597,7 @@ body.ready .ha{opacity:1;transform:none}
 <noscript><style>.ha{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+<a class="skip" href="#top">דילוג לתוכן הראשי</a>
 
 <!-- SVG icon sprite -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -453,6 +615,7 @@ body.ready .ha{opacity:1;transform:none}
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 21a8 8 0 0 1 16 0"/></symbol>
   <symbol id="i-car" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 16v-4l2-5h14l2 5v4H3zM3 12h18"/><circle cx="7" cy="17" r="2" fill="currentColor"/><circle cx="17" cy="17" r="2" fill="currentColor"/></symbol>
   <symbol id="i-nophone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 3l18 18"/></symbol>
+  <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="4.2" r="2.2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4.5 8.5 12 10l7.5-1.5M12 10v4.5M12 14.5 8.5 21M12 14.5l3.5 6.5"/></symbol>
   <symbol id="i-swap" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
@@ -480,6 +643,7 @@ body.ready .ha{opacity:1;transform:none}
 <main id="top">
 <!-- ============ HERO ============ -->
 <section class="hero">
+  <img class="hero-photo" src="images/hero-city.webp" alt="" width="1800" height="1200" fetchpriority="high">
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow ha" style="--d:.05s"><svg width="16" height="16"><use href="#i-map"/></svg> פריסה ארצית · מדן ועד אילת</span>
@@ -569,24 +733,97 @@ body.ready .ha{opacity:1;transform:none}
 <div class="marquee" aria-label="ערים שבהן אנחנו פועלים"><div class="marquee-track" id="marquee"></div></div>
 
 <!-- ============ HOW ============ -->
-<section id="how">
+<section id="how" class="how">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">איך זה עובד</div>
-      <h2>שלושה צעדים ואתם בדרך</h2>
-      <p>בלי הרשמה, בלי כרטיס אשראי באפליקציה ובלי לחפש מונית ברחוב.</p>
+      <h2>ארבעה צעדים ואתם בדרך</h2>
+      <p>בלי הרשמה, בלי אפליקציה ובלי לחפש מונית ברחוב.</p>
     </div>
-    <div class="route" id="route" aria-hidden="true">
-      <div class="route-line"><div class="route-fill"></div></div>
-      <span class="route-pin" data-x="16.67" style="inset-inline-start:16.67%"></span>
-      <span class="route-pin" data-x="50" style="inset-inline-start:50%"></span>
-      <span class="route-pin" data-x="83.33" style="inset-inline-start:83.33%"></span>
-      <div class="route-car" data-car="mini"></div>
-    </div>
-    <div class="steps">
-      <div class="step reveal"><div class="ic"><svg><use href="#i-phone"/></svg></div><h3>מתקשרים או שולחים הודעה</h3><p>חייגו <span class="ltr">*8565</span> או כתבו לנו בוואטסאפ – מאיפה, לאן ומתי.</p></div>
-      <div class="step reveal"><div class="ic"><svg><use href="#i-shekel"/></svg></div><h3>מקבלים מחיר סגור</h3><p>אנחנו נותנים לכם מחיר קבוע לנסיעה עוד לפני שהיא מתחילה. מה שסגרנו – זה מה שמשלמים.</p></div>
-      <div class="step reveal"><div class="ic"><svg><use href="#i-car"/></svg></div><h3>נהג בדרך אליכם</h3><p>אנחנו משבצים לכם נהג זמין מהקרובים אליכם, מתוך רשת של כ־30,000 נהגים בכל הארץ.</p></div>
+    <div class="how-grid">
+      <ol class="hsteps" id="hsteps">
+        <li class="hstep on" data-i="0"><button type="button" class="hstep-btn"><span class="hnum">01</span><span class="htxt"><b>מחייגים <span class="ltr">*8565</span></b><span>או שולחים הודעה בוואטסאפ. אומרים מאיפה, לאן ומתי – וזהו.</span></span></button></li>
+        <li class="hstep" data-i="1"><button type="button" class="hstep-btn"><span class="hnum">02</span><span class="htxt"><b>מקבלים מחיר סגור</b><span>המחיר נקבע מראש, עוד לפני שהנהג יוצא. בלי מונה ובלי הפתעות בדרך.</span></span></button></li>
+        <li class="hstep" data-i="2"><button type="button" class="hstep-btn"><span class="hnum">03</span><span class="htxt"><b>הנהג בדרך אליכם</b><span>נהג זמין מהקרובים אליכם, מתוך רשת של כ־30,000 נהגים, יוצא לאסוף אתכם.</span></span></button></li>
+        <li class="hstep" data-i="3"><button type="button" class="hstep-btn"><span class="hnum">04</span><span class="htxt"><b>מגיעים, רגועים</b><span>נסיעה נוחה עד הדלת, ומשלמים בדיוק את מה שסגרנו.</span></span></button></li>
+      </ol>
+      <div class="phone-col">
+        <div class="phone" id="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="phone-island"></div>
+            <div class="phone-status"><span>21:08</span><span class="ps-icons"><i></i><i></i><i></i><b></b></span></div>
+
+            <!-- 1: dialing -->
+            <div class="pscreen on" data-s="0">
+              <div class="ps-label" id="dialLabel">מחייגים</div>
+              <div class="dial-num"><span class="ltr" id="dialNum"></span><span class="caret"></span></div>
+              <div class="keypad" id="keypad">
+                <span data-k="1">1</span><span data-k="2">2</span><span data-k="3">3</span>
+                <span data-k="4">4</span><span data-k="5">5</span><span data-k="6">6</span>
+                <span data-k="7">7</span><span data-k="8">8</span><span data-k="9">9</span>
+                <span data-k="*">*</span><span data-k="0">0</span><span data-k="#">#</span>
+              </div>
+              <div class="callbtn" id="callBtn"><svg><use href="#i-phone"/></svg></div>
+            </div>
+
+            <!-- 2: fixed price -->
+            <div class="pscreen" data-s="1">
+              <div class="ps-label">המחיר שלכם</div>
+              <div class="ps-route">
+                <div><small>מאיפה</small><b>מודיעין</b></div>
+                <div class="ps-track"><span class="ps-mini" data-car="mini"></span></div>
+                <div><small>לאן</small><b>נתב״ג</b></div>
+              </div>
+              <div class="ps-price"><span>₪</span><b id="priceNum">0</b></div>
+              <div class="ps-note">מחיר לדוגמה בלבד</div>
+              <ul class="ps-checks">
+                <li>בלי מונה</li><li>בלי תוספות בדרך</li><li>יודעים מראש כמה משלמים</li>
+              </ul>
+              <div class="ps-stamp">מחיר סגור ✓</div>
+            </div>
+
+            <!-- 3: driver on the way -->
+            <div class="pscreen ps-mapwrap" data-s="2">
+              <svg class="ps-map" viewBox="0 0 280 600" preserveAspectRatio="xMidYMid slice">
+                <rect width="280" height="600" fill="#171A1F"/>
+                <g fill="#1F242B">
+                  <rect x="12" y="60" width="64" height="66" rx="7"/><rect x="96" y="60" width="78" height="66" rx="7"/><rect x="194" y="60" width="74" height="66" rx="7"/>
+                  <rect x="12" y="152" width="34" height="76" rx="7"/><rect x="80" y="152" width="94" height="76" rx="7"/><rect x="194" y="152" width="74" height="76" rx="7"/>
+                  <rect x="12" y="254" width="116" height="62" rx="7"/><rect x="164" y="254" width="104" height="62" rx="7"/>
+                  <rect x="12" y="342" width="64" height="90" rx="7"/><rect x="96" y="342" width="78" height="90" rx="7"/><rect x="194" y="342" width="74" height="90" rx="7"/>
+                  <rect x="12" y="458" width="116" height="130" rx="7"/><rect x="164" y="458" width="104" height="130" rx="7"/>
+                </g>
+                <rect x="96" y="342" width="78" height="90" rx="7" fill="#20352A"/>
+                <path d="M0 240 H280 M0 330 H280 M146 0 V600" stroke="#262B33" stroke-width="6" fill="none"/>
+                <path id="mapRoute" class="map-route" pathLength="1" d="M184 470 V330 H86 V240 H62 V170"/>
+                <g class="map-pin"><circle cx="62" cy="166" r="16" fill="rgba(255,199,44,.25)"/><circle cx="62" cy="166" r="8" fill="#FFC72C" stroke="#121417" stroke-width="3"/></g>
+                <g class="map-me"><rect x="30" y="128" width="64" height="22" rx="11" fill="#FFC72C"/><text x="62" y="143.5" text-anchor="middle" font-size="11" font-weight="800" fill="#121417" font-family="Heebo,sans-serif">אתם כאן</text></g>
+                <g id="mapCar" opacity="0"><circle r="16" fill="rgba(255,199,44,.18)"/><rect x="-12" y="-7" width="24" height="14" rx="4.5" fill="#FFC72C" stroke="#121417" stroke-width="2"/><rect x="2" y="-5" width="5" height="10" rx="1.8" fill="#1E2228"/><rect x="-9" y="-5" width="4" height="10" rx="1.5" fill="#1E2228"/>
+                  <animateMotion id="carMotion" dur="5s" begin="indefinite" fill="freeze" rotate="auto" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .4 1"><mpath href="#mapRoute"/></animateMotion></g>
+              </svg>
+              <div class="ps-sheet">
+                <div class="ps-eta-bar"><i id="etaBar"></i></div>
+                <div class="ps-drv">
+                  <span class="drv-ava">ז</span>
+                  <span class="drv-txt"><b>הנהג בדרך אליכם</b><small>נהג מרשת זוז</small></span>
+                  <span class="drv-eta"><b id="eta">4</b><small>דק׳</small></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4: arrived -->
+            <div class="pscreen ps-done" data-s="3">
+              <div class="confetti" id="confetti"></div>
+              <svg class="done-check" viewBox="0 0 120 120"><circle class="dc-ring" cx="60" cy="60" r="50" pathLength="1"/><path class="dc-tick" d="M38 62 L54 77 L84 45" pathLength="1"/></svg>
+              <h4>הגעתם.</h4>
+              <p>תודה שנסעתם עם זוז</p>
+              <div class="stars" id="stars"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+              <small>דרגו את הנסיעה</small>
+            </div>
+          </div>
+        </div>
+        <div class="phone-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
     </div>
   </div>
 </section>
@@ -613,24 +850,28 @@ body.ready .ha{opacity:1;transform:none}
         <button class="go" data-preset="נתב״ג – טרמינל 3">להזמנה לנתב״ג</button>
       </div>
       <div class="svc reveal">
+        <div class="svc-media"><img src="images/events.webp" alt="חוגגים עם זיקוקי יד באירוע בלילה" loading="lazy" width="1100" height="733"></div>
         <div class="ic"><svg><use href="#i-party"/></svg></div>
         <h3>אירועים ובילויים</h3>
         <p>חתונה, בר מצווה או יציאה עם החברים – תחגגו, ואנחנו נדאג שתגיעו ותחזרו בבטחה.</p>
         <button class="go" data-preset="">להזמנה לאירוע</button>
       </div>
       <div class="svc reveal">
+        <div class="svc-media"><img src="images/highway.webp" alt="כביש מהיר בלילה עם שובלי אור של מכוניות" loading="lazy" width="1100" height="1650"></div>
         <div class="ic"><svg><use href="#i-map"/></svg></div>
         <h3>נסיעות בין־עירוניות</h3>
         <p>ירושלים, תל אביב, חיפה, באר שבע ומודיעין – וכל מה שביניהן. נסיעה ישירה מדלת לדלת.</p>
         <button class="go" data-preset="">להזמנת נסיעה</button>
       </div>
       <div class="svc reveal">
+        <div class="svc-media"><img src="images/business.webp" alt="נוסע קורא במושב האחורי של רכב" loading="lazy" width="1100" height="1650"></div>
         <div class="ic"><svg><use href="#i-brief"/></svg></div>
         <h3>שירות לעסקים</h3>
         <p>נסיעות לעובדים, ללקוחות ולאורחים – עם שירות אמין ואיש קשר זמין.</p>
         <a class="go" href="#business">לפרטים לעסקים</a>
       </div>
       <div class="svc reveal">
+        <div class="svc-media"><img src="images/why-taxi.webp" alt="מונית עם שלט מואר ברחוב בלילה" loading="lazy" width="1100" height="619"></div>
         <div class="ic"><svg><use href="#i-cal"/></svg></div>
         <h3>תכנון לסופ״ש</h3>
         <p>מתכננים את הסופ״ש? הזמינו כבר ביום חמישי את הנסיעות של שישי ומוצ״ש, ותורידו את זה מהראש.</p>
@@ -786,6 +1027,47 @@ body.ready .ha{opacity:1;transform:none}
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<!-- Accessibility -->
+<button type="button" class="a11y-btn" id="a11yBtn" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel"><svg><use href="#i-a11y"/></svg></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-modal="false" aria-labelledby="a11yTitle" hidden>
+  <div class="a11y-head"><b id="a11yTitle">התאמות נגישות</b><button type="button" class="a11y-x" id="a11yClose" aria-label="סגירת תפריט הנגישות">✕</button></div>
+  <div class="a11y-size" role="group" aria-label="גודל טקסט">
+    <span>גודל טקסט</span>
+    <button type="button" data-size="-1" aria-label="הקטנת טקסט">א−</button>
+    <output id="a11ySize" aria-live="polite">100%</output>
+    <button type="button" data-size="1" aria-label="הגדלת טקסט">א+</button>
+  </div>
+  <div class="a11y-grid">
+    <button type="button" data-opt="contrast" aria-pressed="false"><span class="ao-ic">◐</span>ניגודיות גבוהה</button>
+    <button type="button" data-opt="gray" aria-pressed="false"><span class="ao-ic">▦</span>גווני אפור</button>
+    <button type="button" data-opt="links" aria-pressed="false"><span class="ao-ic">🔗︎</span>הדגשת קישורים</button>
+    <button type="button" data-opt="font" aria-pressed="false"><span class="ao-ic">Aa</span>גופן קריא</button>
+    <button type="button" data-opt="spacing" aria-pressed="false"><span class="ao-ic">↕</span>ריווח טקסט</button>
+    <button type="button" data-opt="still" aria-pressed="false"><span class="ao-ic">❚❚</span>עצירת אנימציות</button>
+    <button type="button" data-opt="cursor" aria-pressed="false"><span class="ao-ic">➤</span>סמן גדול</button>
+    <button type="button" data-opt="focus" aria-pressed="false"><span class="ao-ic">⌖</span>הדגשת פוקוס</button>
+  </div>
+  <div class="a11y-foot">
+    <button type="button" id="a11yReset">איפוס הגדרות</button>
+    <button type="button" id="a11yStmtBtn">הצהרת נגישות</button>
+  </div>
+</div>
+<dialog class="a11y-stmt" id="a11yStmt" aria-labelledby="stmtTitle">
+  <h2 id="stmtTitle">הצהרת נגישות</h2>
+  <p>אנחנו בזוז רוצים שכל אחד ואחת יוכלו להזמין נסיעה בקלות, כולל אנשים עם מוגבלות. האתר נבנה מתוך כוונה לעמוד בהנחיות WCAG 2.1 ברמה AA ובתקן הישראלי 5568, ככל האפשר.</p>
+  <h3>מה יש באתר</h3>
+  <ul>
+    <li>תפריט נגישות: גודל טקסט, ניגודיות, גווני אפור, גופן קריא, ריווח, הדגשת קישורים ופוקוס, סמן גדול ועצירת אנימציות.</li>
+    <li>ניווט מלא במקלדת וקישור לדילוג לתוכן הראשי.</li>
+    <li>תיאורים חלופיים לתמונות ותוויות לכפתורים ולשדות.</li>
+    <li>התאמה לנייד וכיבוד הגדרת "הפחתת תנועה" של המכשיר.</li>
+  </ul>
+  <h3>נתקלתם בבעיה?</h3>
+  <p>אם משהו באתר לא נגיש לכם, נשמח לשמוע ולתקן: טלפון <a href="tel:*8565" class="ltr">*8565</a> · וואטסאפ <a href="https://wa.me/972584920004" class="ltr">058-4920004</a>.</p>
+  <p class="stmt-date">עודכן לאחרונה: נובמבר 2026</p>
+  <form method="dialog"><button class="btn btn-call">סגירה</button></form>
+</dialog>
+
 <!-- Intro splash: same logo reveal as the end card of Zuz's videos -->
 <div class="intro" id="intro" aria-hidden="true" hidden>
   <div class="intro-logo" data-logo="play"></div>
@@ -897,21 +1179,129 @@ body.ready .ha{opacity:1;transform:none}
   });
 
   // ----- Scroll-linked: header, progress car, route car -----
-  var header=$("header"), sprog=$(".sprog"), route=$("#route"), steps=$(".steps"), pins=$$(".route-pin");
-  var movers=[$(".sprog-car .car"),$(".route-car .car")], mt, ticking=false;
+  var header=$("header"), sprog=$(".sprog");
+  var movers=[$(".sprog-car .car")], mt, ticking=false;
   function onScroll(){
     ticking=false;
     var y=window.scrollY, max=document.documentElement.scrollHeight-innerHeight;
     sprog.style.setProperty("--sp",(max>0?y/max*100:0)+"%");
     header.classList.toggle("scrolled",y>10);
-    var r=steps.getBoundingClientRect();
-    var p=Math.min(1,Math.max(0,(innerHeight*.95-r.top)/(innerHeight*.85)));
-    route.style.setProperty("--p",(p*100)+"%");
-    pins.forEach(function(pin){pin.classList.toggle("on",p*100>=parseFloat(pin.dataset.x)-2)});
     if(!reduced){ movers.forEach(function(c){c.classList.add("go")}); clearTimeout(mt); mt=setTimeout(function(){movers.forEach(function(c){c.classList.remove("go")})},160); }
   }
   window.addEventListener("scroll",function(){ if(!ticking){ticking=true;requestAnimationFrame(onScroll)} },{passive:true});
   onScroll();
+
+  // ================= PHONE STORY (How it works) =================
+  (function(){
+    var steps=$$(".hstep"), screens=$$(".pscreen"), dots=$$(".phone-dots i");
+    var timers=[], cur=-1, mobile=window.matchMedia("(max-width:980px)");
+    function still(){ return reduced || document.documentElement.classList.contains("a11y-still") }
+    function later(fn,ms){ timers.push(setTimeout(fn, still()?0:ms)) }
+    function clear(){ timers.forEach(clearTimeout); timers=[] }
+
+    // confetti pieces
+    var conf=$("#confetti"), colors=["#FFC72C","#22C55E","#FFFFFF","#FF6B6B","#4DA3FF"];
+    for(var i=0;i<26;i++){var c=document.createElement("i");c.style.left=(Math.random()*100)+"%";c.style.background=colors[i%colors.length];c.style.animationDelay=(Math.random()*.8)+"s";conf.appendChild(c)}
+
+    var runs=[
+      function dial(){
+        var num=$("#dialNum"), label=$("#dialLabel"), call=$("#callBtn"), seq="*8565";
+        num.textContent=""; label.textContent="מחייגים"; call.classList.remove("ring");
+        seq.split("").forEach(function(ch,k){
+          later(function(){
+            num.textContent+=ch;
+            var key=$('#keypad [data-k="'+ch+'"]'); if(!key) return;
+            key.classList.add("press"); setTimeout(function(){key.classList.remove("press")},still()?0:260);
+          }, 500+k*420);
+        });
+        later(function(){ call.classList.add("ring"); label.textContent="מתקשרים לזוז…" }, 500+seq.length*420+250);
+        later(function(){ label.textContent="מחובר · אומרים מאיפה ולאן" }, 500+seq.length*420+2200);
+      },
+      function price(){
+        var el=$("#priceNum"), checks=$$(".ps-checks li"), stamp=$(".ps-stamp"), target=139;
+        el.textContent="0"; checks.forEach(function(li){li.classList.remove("in")}); stamp.classList.remove("in");
+        if(still()){ el.textContent=target; checks.forEach(function(li){li.classList.add("in")}); stamp.classList.add("in"); return; }
+        var t0=performance.now();
+        (function tick(t){ if(cur!==1) return; var p=Math.min(1,(t-t0)/1100); el.textContent=Math.round(target*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(tick) })(t0);
+        checks.forEach(function(li,k){ later(function(){li.classList.add("in")}, 900+k*220) });
+        later(function(){ stamp.classList.add("in") }, 1700);
+      },
+      function map(){
+        var eta=$("#eta"), bar=$("#etaBar"), motion=$("#carMotion");
+        eta.textContent="4"; bar.style.transition="none"; bar.style.width="0";
+        try{ if(motion && motion.beginElement){ motion.beginElement(); if(still()) motion.endElement(); $("#mapCar").setAttribute("opacity","1") } }catch(e){}
+        void bar.offsetWidth; bar.style.transition=still()?"none":"width 5s linear"; bar.style.width="100%";
+        [3,2,1].forEach(function(n,k){ later(function(){ eta.textContent=n }, 1300+k*1250) });
+      },
+      function done(){
+        var stars=$$("#stars i"); stars.forEach(function(s){s.classList.remove("in")});
+        stars.forEach(function(s,k){ later(function(){s.classList.add("in")}, 1100+k*170) });
+      }
+    ];
+
+    function setStep(i){
+      if(i===cur) return; cur=i; clear();
+      steps.forEach(function(s,k){s.classList.toggle("on",k===i)});
+      screens.forEach(function(s,k){s.classList.toggle("on",k===i)});
+      dots.forEach(function(d,k){d.classList.toggle("on",k===i)});
+      runs[i]();
+    }
+    setStep(0);
+
+    // Desktop: the step in the middle of the viewport drives the phone
+    var howEl=$("#how"), pend=false;
+    function pickStep(){
+      pend=false; if(mobile.matches) return;
+      var hr=howEl.getBoundingClientRect(); if(hr.bottom<0 || hr.top>innerHeight) return;
+      var mid=innerHeight/2, best=0, bd=1e9;
+      steps.forEach(function(s,k){ var r=s.getBoundingClientRect(), d=Math.abs(r.top+r.height/2-mid); if(d<bd){bd=d;best=k} });
+      setStep(best);
+    }
+    window.addEventListener("scroll",function(){ if(!pend){pend=true;requestAnimationFrame(pickStep)} },{passive:true});
+    pickStep();
+    // Mobile: auto-play while the section is on screen
+    var auto=null;
+    function startAuto(){ stopAuto(); auto=setInterval(function(){ setStep((cur+1)%4) }, 6000) }
+    function stopAuto(){ if(auto){clearInterval(auto);auto=null} }
+    if("IntersectionObserver" in window){
+      new IntersectionObserver(function(es){
+        if(mobile.matches && es[0].isIntersecting && !still()) startAuto(); else stopAuto();
+      },{threshold:.35}).observe($("#how"));
+    }
+    // Click / keyboard on a step
+    steps.forEach(function(s){ s.querySelector(".hstep-btn").addEventListener("click",function(){
+      cur=-1; setStep(+s.dataset.i); if(mobile.matches && auto) startAuto();
+    })});
+  })();
+
+  // ================= ACCESSIBILITY =================
+  (function(){
+    var root=document.documentElement, btn=$("#a11yBtn"), panel=$("#a11yPanel");
+    var opts=["contrast","gray","links","font","spacing","still","cursor","focus"];
+    var state={size:0};
+    try{ state=Object.assign(state, JSON.parse(localStorage.getItem("zuzA11y")||"{}")) }catch(e){}
+    function save(){ try{ localStorage.setItem("zuzA11y",JSON.stringify(state)) }catch(e){} }
+    function apply(){
+      opts.forEach(function(o){
+        root.classList.toggle("a11y-"+o, !!state[o]);
+        var b=panel.querySelector('[data-opt="'+o+'"]'); if(b) b.setAttribute("aria-pressed", state[o]?"true":"false");
+      });
+      var z=1+state.size*.1; root.style.setProperty("--a11y-zoom", z);
+      $("#a11ySize").textContent=Math.round(z*100)+"%";
+    }
+    function open(){ panel.hidden=false; btn.setAttribute("aria-expanded","true"); panel.querySelector("button").focus() }
+    function close(){ panel.hidden=true; btn.setAttribute("aria-expanded","false"); btn.focus() }
+    btn.addEventListener("click",function(){ panel.hidden?open():close() });
+    $("#a11yClose").addEventListener("click",close);
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape" && !panel.hidden) close() });
+    document.addEventListener("click",function(e){ if(!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) { panel.hidden=true; btn.setAttribute("aria-expanded","false") } });
+    panel.querySelectorAll("[data-opt]").forEach(function(b){ b.addEventListener("click",function(){ var o=b.dataset.opt; state[o]=!state[o]; apply(); save() }) });
+    panel.querySelectorAll("[data-size]").forEach(function(b){ b.addEventListener("click",function(){ state.size=Math.max(-1,Math.min(4,state.size+(+b.dataset.size))); apply(); save() }) });
+    $("#a11yReset").addEventListener("click",function(){ state={size:0}; apply(); save() });
+    var dlg=$("#a11yStmt");
+    $("#a11yStmtBtn").addEventListener("click",function(){ if(dlg.showModal) dlg.showModal(); else dlg.setAttribute("open","") });
+    apply();
+  })();
 
   // ----- Road divider: car drives through each time it comes into view -----
   if(!reduced && "IntersectionObserver" in window){

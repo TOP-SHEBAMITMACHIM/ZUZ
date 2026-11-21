@@ -341,7 +341,7 @@ body.ready .ha{opacity:1;transform:none}
 .car-b{position:absolute;right:100%;bottom:38px;width:105px;opacity:.5;animation:driveR 15s linear 1.5s infinite}
 
 /* City marquee */
-.marquee{background:var(--ink);color:#fff;overflow:hidden;padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee{direction:ltr;background:var(--ink);color:#fff;overflow:hidden;padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .marquee-track{display:flex;width:max-content;direction:ltr;animation:marq 45s linear infinite}
 .marquee-track span{display:flex;align-items:center;gap:26px;padding-right:26px;font-weight:800;font-size:21px;white-space:nowrap}
 .marquee-track span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
@@ -399,10 +399,14 @@ body.ready .ha{opacity:1;transform:none}
 .ps-track{flex:1;height:22px;position:relative;background:repeating-linear-gradient(270deg,rgba(255,255,255,.25) 0 6px,transparent 6px 11px) center/100% 2px no-repeat}
 .ps-mini{position:absolute;top:-2px;right:0;width:34px;transition:right 1.6s cubic-bezier(.45,0,.35,1)}
 .pscreen.on .ps-mini{right:calc(100% - 34px)}
-.ps-price{text-align:center;color:var(--yellow);display:flex;justify-content:center;align-items:baseline;gap:6px;direction:ltr}
-.ps-price span{font-size:28px;font-weight:800}
-.ps-price b{font-size:68px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
-.ps-note{text-align:center;font-size:11px;color:rgba(255,255,255,.45);margin:4px 0 16px}
+.ps-lock{width:86px;height:86px;margin:0 auto;border-radius:26px;background:rgba(255,199,44,.12);display:grid;place-items:center;transition:box-shadow .4s}
+.ps-lock svg{width:56px;height:56px;overflow:visible}
+.lk-body{fill:var(--yellow)}
+.lk-shackle{fill:none;stroke:var(--yellow);stroke-width:6;stroke-linecap:round;transform:translateY(-9px) rotate(-14deg);transform-origin:43px 30px;transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
+.ps-lock.locked{box-shadow:0 0 0 6px rgba(255,199,44,.08),0 0 34px rgba(255,199,44,.35)}
+.ps-lock.locked .lk-shackle{transform:none}
+.ps-locktxt{text-align:center;font-size:21px;font-weight:900;margin:12px 0 16px;line-height:1.3}
+.ps-locktxt small{display:block;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);margin-top:2px}
 .ps-checks{list-style:none;display:grid;gap:10px}
 .ps-checks li{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;opacity:0;transform:translateX(-14px);transition:.45s}
 .ps-checks li::before{content:"✓";width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,.18);color:#22C55E;display:grid;place-items:center;font-size:12px;font-weight:900}
@@ -448,6 +452,38 @@ body.ready .ha{opacity:1;transform:none}
 .phone-dots{position:relative;z-index:1;display:flex;justify-content:center;gap:8px;margin-top:26px}
 .phone-dots i{width:8px;height:8px;border-radius:8px;background:var(--line);transition:width .4s,background .4s}
 .phone-dots i.on{width:28px;background:var(--ink)}
+
+/* ---------- Testimonials ---------- */
+.voices{background:var(--ink);color:#fff;overflow:hidden;position:relative;padding-bottom:100px}
+.voices::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,199,44,.16),transparent 65%);top:-160px;left:-120px;animation:glow 14s ease-in-out infinite alternate}
+.voices .sec-head h2{color:#fff}
+.voices .sec-head p{color:rgba(255,255,255,.65)}
+.voices .kicker{color:var(--yellow)}
+.voices-rail{direction:ltr;position:relative;overflow:hidden;padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.voices-rail + .voices-rail{margin-top:6px}
+.v-track{display:flex;gap:22px;width:max-content;direction:ltr;animation:vmove 42s linear infinite}
+.voices-rail.rev .v-track{animation-direction:reverse;animation-duration:50s}
+.voices-rail:hover .v-track,.voices-rail:focus-within .v-track{animation-play-state:paused}
+@keyframes vmove{to{transform:translateX(-50%)}}
+.v-card{direction:rtl;flex:none;width:340px;background:#fff;color:var(--ink);border-radius:22px 22px 22px 6px;padding:22px 22px 18px;position:relative;box-shadow:0 18px 40px rgba(0,0,0,.35);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.v-card:nth-child(odd){transform:rotate(-1.2deg)}
+.v-card:nth-child(even){transform:rotate(1deg) translateY(8px)}
+.v-card:hover{transform:rotate(0) translateY(-6px) scale(1.03)}
+.v-card::before{content:"”";position:absolute;top:-8px;left:18px;font-size:86px;line-height:1;font-weight:900;color:var(--yellow);font-family:Georgia,serif}
+.voices-rail.rev .v-card{background:#1E2228;color:#fff;border-radius:22px 22px 6px 22px}
+.voices-rail.rev .v-who small{color:rgba(255,255,255,.55)}
+.v-text{font-size:19px;font-weight:700;line-height:1.5;min-height:58px;position:relative}
+.v-who{display:flex;align-items:center;gap:10px;margin-top:16px}
+.v-plat{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff}
+.v-plat svg{width:18px;height:18px}
+.v-plat.tt{background:#111;box-shadow:inset 2px 0 0 #25F4EE,inset -2px 0 0 #FE2C55}
+.v-plat.ig{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)}
+.v-who b{display:block;font-size:14px}
+.v-who small{color:var(--muted);font-size:12px}
+.v-check{margin-inline-start:auto;font-size:12px;font-weight:800;color:#16A34A;background:rgba(34,197,94,.12);padding:4px 10px;border-radius:99px;white-space:nowrap}
+html.a11y-still .voices-rail{overflow-x:auto}
+@media (prefers-reduced-motion:reduce){.v-track{animation:none}.voices-rail{overflow-x:auto}}
+@media (max-width:720px){.v-card{width:280px}.v-text{font-size:17px}}
 
 /* ---------- Photos ---------- */
 .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;filter:saturate(.85);-webkit-mask-image:linear-gradient(180deg,#000 20%,rgba(0,0,0,.4) 70%,transparent 95%);mask-image:linear-gradient(180deg,#000 20%,rgba(0,0,0,.4) 70%,transparent 95%);animation:kenburns 26s ease-in-out infinite alternate}
@@ -774,8 +810,10 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
                 <div class="ps-track"><span class="ps-mini" data-car="mini"></span></div>
                 <div><small>לאן</small><b>נתב״ג</b></div>
               </div>
-              <div class="ps-price"><span>₪</span><b id="priceNum">0</b></div>
-              <div class="ps-note">מחיר לדוגמה בלבד</div>
+              <div class="ps-lock" id="psLock">
+                <svg viewBox="0 0 64 64"><path class="lk-shackle" d="M21 30V21a11 11 0 0 1 22 0v9"/><rect class="lk-body" x="13" y="28" width="38" height="29" rx="8"/><circle cx="32" cy="41" r="4" fill="#121417"/><rect x="30.5" y="42" width="3" height="7" rx="1.5" fill="#121417"/></svg>
+              </div>
+              <div class="ps-locktxt">המחיר נקבע בשיחה<small>ולא משתנה בדרך</small></div>
               <ul class="ps-checks">
                 <li>בלי מונה</li><li>בלי תוספות בדרך</li><li>יודעים מראש כמה משלמים</li>
               </ul>
@@ -850,7 +888,7 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
         <button class="go" data-preset="נתב״ג – טרמינל 3">להזמנה לנתב״ג</button>
       </div>
       <div class="svc reveal">
-        <div class="svc-media"><img src="images/events.webp" alt="חוגגים עם זיקוקי יד באירוע בלילה" loading="lazy" width="1100" height="733"></div>
+        <div class="svc-media"><img src="images/events.webp" alt="אולם אירועים מואר עם נברשות זהב" loading="lazy" width="1100" height="1650"></div>
         <div class="ic"><svg><use href="#i-party"/></svg></div>
         <h3>אירועים ובילויים</h3>
         <p>חתונה, בר מצווה או יציאה עם החברים – תחגגו, ואנחנו נדאג שתגיעו ותחזרו בבטחה.</p>
@@ -907,8 +945,21 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
   </div>
 </section>
 
+<!-- ============ TESTIMONIALS (real comments from Zuz's social pages) ============ -->
+<section class="voices" id="voices" aria-labelledby="voicesTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">מה אומרים עלינו</div>
+      <h2 id="voicesTitle">נסעו איתנו. ואמרו את זה.</h2>
+      <p>תגובות אמיתיות שנכתבו לנו ברשתות החברתיות, מילה במילה.</p>
+    </div>
+  </div>
+  <div class="voices-rail" id="voicesRail"></div>
+  <div class="voices-rail rev" id="voicesRail2" aria-hidden="true"></div>
+</section>
+
 <!-- ============ BUSINESS ============ -->
-<section id="business" style="padding-top:0">
+<section id="business">
   <div class="wrap">
     <div class="biz reveal">
       <div>
@@ -1218,11 +1269,9 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
         later(function(){ label.textContent="מחובר · אומרים מאיפה ולאן" }, 500+seq.length*420+2200);
       },
       function price(){
-        var el=$("#priceNum"), checks=$$(".ps-checks li"), stamp=$(".ps-stamp"), target=139;
-        el.textContent="0"; checks.forEach(function(li){li.classList.remove("in")}); stamp.classList.remove("in");
-        if(still()){ el.textContent=target; checks.forEach(function(li){li.classList.add("in")}); stamp.classList.add("in"); return; }
-        var t0=performance.now();
-        (function tick(t){ if(cur!==1) return; var p=Math.min(1,(t-t0)/1100); el.textContent=Math.round(target*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(tick) })(t0);
+        var lock=$("#psLock"), checks=$$(".ps-checks li"), stamp=$(".ps-stamp");
+        lock.classList.remove("locked"); checks.forEach(function(li){li.classList.remove("in")}); stamp.classList.remove("in");
+        later(function(){ lock.classList.add("locked") }, 500);
         checks.forEach(function(li,k){ later(function(){li.classList.add("in")}, 900+k*220) });
         later(function(){ stamp.classList.add("in") }, 1700);
       },
@@ -1272,6 +1321,30 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
     steps.forEach(function(s){ s.querySelector(".hstep-btn").addEventListener("click",function(){
       cur=-1; setStep(+s.dataset.i); if(mobile.matches && auto) startAuto();
     })});
+  })();
+
+  // ================= TESTIMONIALS =================
+  // Real comments copied word for word from Zuz's public TikTok and Instagram (Nov 2026).
+  (function(){
+    var V=[
+      {t:"נסעתי איתכם השבוע השירות היה מצוין תודה רבה והמחיר הכי טוב שיש 👌", who:"M", p:"tt"},
+      {t:"נסעתי איתם אחלה של שירות", who:"mshh•••", p:"ig"},
+      {t:"הזמנתי זוז כמה פעמים והיה מושלם רזי תודה יאלופה", who:"M", p:"tt"},
+      {t:"אחלה זוז מומלץ ביותר", who:"גולש/ת בטיקטוק", p:"tt"}
+    ];
+    var name={tt:"TikTok",ig:"Instagram"};
+    function card(v,hidden){
+      return '<figure class="v-card"'+(hidden?' aria-hidden="true"':'')+'><blockquote class="v-text">'+v.t+'</blockquote>'+
+        '<figcaption class="v-who"><span class="v-plat '+v.p+'"><svg><use href="#i-'+(v.p==="tt"?"tt":"ig")+'"/></svg></span>'+
+        '<span><b><bdi>'+v.who+'</bdi></b><small>תגובה ב־'+name[v.p]+'</small></span><span class="v-check">✓ תגובה אמיתית</span></figcaption></figure>';
+    }
+    function rail(list){
+      var set=list.concat(list); // enough cards to fill wide screens
+      var a=set.map(function(v,i){return card(v,i>=list.length)}).join(""), b=set.map(function(v){return card(v,true)}).join("");
+      return '<div class="v-track">'+a+b+'</div>';
+    }
+    $("#voicesRail").innerHTML=rail(V);
+    $("#voicesRail2").innerHTML=rail(V.slice(2).concat(V.slice(0,2)));
   })();
 
   // ================= ACCESSIBILITY =================

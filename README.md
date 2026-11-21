@@ -18,7 +18,7 @@
 |---|---|
 | `hero-city.webp` | unsplash.com/photos/a-city-street-at-night-with-traffic-lights (photo-1670702388151) |
 | `airport.webp` | photo-1767710096520 – People with luggage in a modern airport terminal |
-| `events.webp` | photo-1473652502225 – sparklers at a night celebration |
+| `events.webp` | photo-1759519238029 – grand ballroom with chandeliers |
 | `highway.webp` | photo-1542705959 – timelapse of vehicles at night |
 | `business.webp` | photo-1758315408229 – person reading in a car |
 | `why-taxi.webp` | photo-1609510889785 – taxi on the road at night |

@@ -8,6 +8,13 @@
 <meta property="og:title" content="זוז – מתקשרים ונוסעים | *8565">
 <meta property="og:description" content="מונית בפריסה ארצית, במחיר קבוע מראש. חייגו *8565 או שלחו וואטסאפ.">
 <meta name="theme-color" content="#FFC72C">
+<meta name="color-scheme" content="light dark">
+<script>
+  // Set the theme before first paint (saved choice, otherwise the device setting)
+  (function(){var t=null;try{t=localStorage.getItem("zuzTheme")}catch(e){}
+    if(t!=="dark"&&t!=="light") t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";
+    document.documentElement.setAttribute("data-theme",t)})();
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23fff'/%3E%3Cpath d='M10 26 A24 24 0 0 1 54 26' fill='none' stroke='%23FFC72C' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M54 40 A24 24 0 0 1 10 40' fill='none' stroke='%23121417' stroke-width='5' stroke-linecap='round'/%3E%3Ctext x='33' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%23FFC72C' transform='skewX(-10) translate(7 0)'%3EU%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -453,6 +460,49 @@ body.ready .ha{opacity:1;transform:none}
 .phone-dots i{width:8px;height:8px;border-radius:8px;background:var(--line);transition:width .4s,background .4s}
 .phone-dots i.on{width:28px;background:var(--ink)}
 
+/* ---------- Theme toggle ---------- */
+.theme-btn{width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.09);color:#fff;cursor:pointer;display:grid;place-items:center;position:relative;overflow:hidden;flex:none;transition:background .2s}
+.theme-btn:hover{background:rgba(255,199,44,.2);color:var(--yellow)}
+.theme-btn svg{width:20px;height:20px;position:absolute;transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .3s}
+.theme-btn .ic-sun{transform:translateY(30px) rotate(-90deg);opacity:0}
+html[data-theme="dark"] .theme-btn .ic-moon{transform:translateY(-30px) rotate(90deg);opacity:0}
+html[data-theme="dark"] .theme-btn .ic-sun{transform:none;opacity:1;color:var(--yellow)}
+html.theme-anim,html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .45s ease,color .45s ease,border-color .45s ease,fill .45s ease!important}
+
+/* ---------- Dark theme ---------- */
+html[data-theme="dark"]{--bg:#0D0F12;--soft:#14171B;--line:#2A2F37;--text:#ECEEF1;--muted:#9EA6B1;--card:#1A1E23;--shadow:0 12px 34px rgba(0,0,0,.5);color-scheme:dark}
+html[data-theme="dark"] :is(.svc,.biz-form,details,.chip,.swap,.a11y-panel,.a11y-size button,.a11y-grid button,.a11y-stmt,.why-item){background:var(--card);color:var(--text)}
+html[data-theme="dark"] .book{background:linear-gradient(var(--card),var(--card)) padding-box,conic-gradient(from var(--ang),#FFC72C,rgba(255,199,44,0) 22%,rgba(255,199,44,0) 78%,#FFC72C) border-box;color:var(--text)}
+html[data-theme="dark"] .field input:focus,html[data-theme="dark"] .field select:focus{background:#20252C;border-color:var(--yellow)}
+html[data-theme="dark"] .field select option{background:var(--card)}
+html[data-theme="dark"] :is(.book .or a,.svc .go,.htxt b,.lane-text,.a11y-x,.a11y-foot button,.a11y-grid button){color:var(--text)}
+html[data-theme="dark"] .svc:not(.featured) .go{color:var(--yellow)}
+html[data-theme="dark"] .field label{color:#C3C9D1}
+html[data-theme="dark"] .field input::placeholder{color:#6E7681}
+html[data-theme="dark"] .chip.on{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+html[data-theme="dark"] .swap:hover,html[data-theme="dark"] details[open],html[data-theme="dark"] .day.today{border-color:var(--yellow)}
+html[data-theme="dark"] .day.today{background:var(--card)}
+html[data-theme="dark"] .day.shabbat{background:#1C1F24}
+html[data-theme="dark"] .kicker{color:var(--yellow)}
+html[data-theme="dark"] .svc .ic{color:var(--yellow)}
+html[data-theme="dark"] .svc-media + .ic{border-color:var(--card);color:var(--ink)}
+html[data-theme="dark"] :is(.step .ic,.why-item .ic){background:#262B33}
+html[data-theme="dark"] .how{background:linear-gradient(180deg,var(--bg) 0%,var(--soft) 100%)}
+html[data-theme="dark"] .hstep.on .hstep-btn{background:var(--card)}
+html[data-theme="dark"] .hnum{color:#30353D}
+html[data-theme="dark"] .phone{box-shadow:0 0 0 2px #3A4049,0 0 0 8px #1B1F24,0 50px 90px rgba(0,0,0,.6)}
+html[data-theme="dark"] .phone-dots i.on{background:var(--yellow)}
+html[data-theme="dark"] .lane{background:var(--bg)}
+html[data-theme="dark"] .biz{border:1px solid var(--line)}
+html[data-theme="dark"] .final{background:radial-gradient(ellipse at center,#1F2329 0%,#15181C 55%,#0D0F12 100%)}
+html[data-theme="dark"] .final .btn-call{background:var(--yellow);color:var(--ink)}
+html[data-theme="dark"] .end-logo .zlogo{--zk:#fff;--zbg:#1A1E23}
+html[data-theme="dark"] .a11y-foot #a11yStmtBtn{background:var(--yellow);color:var(--ink)}
+html[data-theme="dark"] .a11y-grid button[aria-pressed="true"]{background:#1A2B4D;border-color:#4D82F0}
+html[data-theme="dark"] .a11y-stmt a{color:var(--yellow)}
+html[data-theme="dark"] .hero-photo{opacity:.22}
+html[data-theme="dark"] footer{background:#08090B}
+
 /* ---------- Testimonials ---------- */
 .voices{background:var(--ink);color:#fff;overflow:hidden;position:relative;padding-bottom:100px}
 .voices::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,199,44,.16),transparent 65%);top:-160px;left:-120px;animation:glow 14s ease-in-out infinite alternate}
@@ -651,6 +701,8 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 21a8 8 0 0 1 16 0"/></symbol>
   <symbol id="i-car" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 16v-4l2-5h14l2 5v4H3zM3 12h18"/><circle cx="7" cy="17" r="2" fill="currentColor"/><circle cx="17" cy="17" r="2" fill="currentColor"/></symbol>
   <symbol id="i-nophone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 3l18 18"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></symbol>
   <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="4.2" r="2.2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4.5 8.5 12 10l7.5-1.5M12 10v4.5M12 14.5 8.5 21M12 14.5l3.5 6.5"/></symbol>
   <symbol id="i-swap" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></symbol>
@@ -669,6 +721,7 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
       <a href="#faq">שאלות נפוצות</a>
     </nav>
     <div class="nav-cta">
+      <button type="button" class="theme-btn" id="themeBtn" aria-label="מעבר לעיצוב כהה" title="עיצוב כהה / בהיר"><svg class="ic-moon"><use href="#i-moon"/></svg><svg class="ic-sun"><use href="#i-sun"/></svg></button>
       <span class="status" id="status"><span class="dot"></span><span id="statusText">זמינים עכשיו</span></span>
       <a class="btn btn-call" href="tel:*8565"><svg><use href="#i-phone"/></svg><span class="ltr">*8565</span></a>
     </div>
@@ -902,7 +955,7 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
         <button class="go" data-preset="">להזמנת נסיעה</button>
       </div>
       <div class="svc reveal">
-        <div class="svc-media"><img src="images/business.webp" alt="נוסע קורא במושב האחורי של רכב" loading="lazy" width="1100" height="1650"></div>
+        <div class="svc-media"><img src="images/business.webp" alt="מושב אחורי מעור ברכב מנהלים" loading="lazy" width="1100" height="734"></div>
         <div class="ic"><svg><use href="#i-brief"/></svg></div>
         <h3>שירות לעסקים</h3>
         <p>נסיעות לעובדים, ללקוחות ולאורחים – עם שירות אמין ואיש קשר זמין.</p>
@@ -955,7 +1008,6 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
     </div>
   </div>
   <div class="voices-rail" id="voicesRail"></div>
-  <div class="voices-rail rev" id="voicesRail2" aria-hidden="true"></div>
 </section>
 
 <!-- ============ BUSINESS ============ -->
@@ -1327,24 +1379,35 @@ html.a11y-focus *:focus{outline:4px solid #FF3B30!important;outline-offset:3px!i
   // Real comments copied word for word from Zuz's public TikTok and Instagram (Nov 2026).
   (function(){
     var V=[
-      {t:"נסעתי איתכם השבוע השירות היה מצוין תודה רבה והמחיר הכי טוב שיש 👌", who:"M", p:"tt"},
-      {t:"נסעתי איתם אחלה של שירות", who:"mshh•••", p:"ig"},
-      {t:"הזמנתי זוז כמה פעמים והיה מושלם רזי תודה יאלופה", who:"M", p:"tt"},
-      {t:"אחלה זוז מומלץ ביותר", who:"גולש/ת בטיקטוק", p:"tt"}
+      {t:"נסעתי איתכם השבוע השירות היה מצוין תודה רבה והמחיר הכי טוב שיש 👌", p:"tt"},
+      {t:"נסעתי איתם אחלה של שירות", p:"ig"},
+      {t:"הזמנתי זוז כמה פעמים והיה מושלם רזי תודה יאלופה", p:"tt"},
+      {t:"אחלה זוז מומלץ ביותר", p:"tt"}
     ];
     var name={tt:"TikTok",ig:"Instagram"};
     function card(v,hidden){
       return '<figure class="v-card"'+(hidden?' aria-hidden="true"':'')+'><blockquote class="v-text">'+v.t+'</blockquote>'+
-        '<figcaption class="v-who"><span class="v-plat '+v.p+'"><svg><use href="#i-'+(v.p==="tt"?"tt":"ig")+'"/></svg></span>'+
-        '<span><b><bdi>'+v.who+'</bdi></b><small>תגובה ב־'+name[v.p]+'</small></span><span class="v-check">✓ תגובה אמיתית</span></figcaption></figure>';
+        '<figcaption class="v-who"><span class="v-plat '+v.p+'"><svg><use href="#i-'+v.p+'"/></svg></span>'+
+        '<span><b>תגובה ב־'+name[v.p]+'</b></span><span class="v-check">✓ תגובה אמיתית</span></figcaption></figure>';
     }
-    function rail(list){
-      var set=list.concat(list); // enough cards to fill wide screens
-      var a=set.map(function(v,i){return card(v,i>=list.length)}).join(""), b=set.map(function(v){return card(v,true)}).join("");
-      return '<div class="v-track">'+a+b+'</div>';
-    }
-    $("#voicesRail").innerHTML=rail(V);
-    $("#voicesRail2").innerHTML=rail(V.slice(2).concat(V.slice(0,2)));
+    // one row: the list repeated to fill wide screens, then duplicated for a seamless loop
+    var set=V.concat(V);
+    $("#voicesRail").innerHTML='<div class="v-track">'+set.map(function(v,i){return card(v,i>=V.length)}).join("")+set.map(function(v){return card(v,true)}).join("")+'</div>';
+  })();
+
+  // ================= THEME TOGGLE =================
+  (function(){
+    var root=document.documentElement, btn=$("#themeBtn");
+    function sync(){ var d=root.getAttribute("data-theme")==="dark"; btn.setAttribute("aria-label", d?"מעבר לעיצוב בהיר":"מעבר לעיצוב כהה"); btn.setAttribute("aria-pressed", d?"true":"false") }
+    btn.addEventListener("click",function(){
+      var next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+      if(!reduced && !root.classList.contains("a11y-still")){ root.classList.add("theme-anim"); setTimeout(function(){root.classList.remove("theme-anim")},500) }
+      root.setAttribute("data-theme",next); sync();
+      try{ localStorage.setItem("zuzTheme",next) }catch(e){}
+    });
+    // follow the device setting until the visitor picks a theme themselves
+    if(window.matchMedia){ var mq=matchMedia("(prefers-color-scheme: dark)"); var h=function(e){ var saved=null; try{saved=localStorage.getItem("zuzTheme")}catch(_){} if(!saved){ root.setAttribute("data-theme",e.matches?"dark":"light"); sync() } }; mq.addEventListener?mq.addEventListener("change",h):mq.addListener&&mq.addListener(h) }
+    sync();
   })();
 
   // ================= ACCESSIBILITY =================

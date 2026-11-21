@@ -20,7 +20,7 @@
 | `airport.webp` | photo-1767710096520 – People with luggage in a modern airport terminal |
 | `events.webp` | photo-1759519238029 – grand ballroom with chandeliers |
 | `highway.webp` | photo-1542705959 – timelapse of vehicles at night |
-| `business.webp` | photo-1758315408229 – person reading in a car |
+| `business.webp` | photo-1770290405640 – black leather car seats in the back row |
 | `why-taxi.webp` | photo-1609510889785 – taxi on the road at night |
 | `taxi-sign.webp` | photo-1556122071 – yellow taxi light sign |
 
